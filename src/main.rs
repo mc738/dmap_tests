@@ -15,7 +15,7 @@ fn test_1() {
     
     let (dir1, dir2) = create_paths(1);
     
-    let expected = DiffReport::create(vec![ Remove(String::from("hello_world.txt")) ]);
+    let expected = Ok(DiffReport::create(vec![ Remove(String::from("hello_world.txt")) ]));
     
     let actual = diff(InputType::Directory(dir1.as_ref()), InputType::Directory(dir2.as_ref()));
         
@@ -25,7 +25,7 @@ fn test_1() {
 fn test_2() {
     let (dir1, dir2) = create_paths(2);
 
-    let expected = DiffReport::create(vec![ Add(String::from("hello_world.txt")) ]);
+    let expected = Ok(DiffReport::create(vec![ Add(String::from("hello_world.txt")) ]));
 
     let actual = diff(InputType::Directory(dir1.as_ref()), InputType::Directory(dir2.as_ref()));
 
@@ -35,7 +35,7 @@ fn test_2() {
 fn test_3() {
     let (dir1, dir2) = create_paths(3);
 
-    let expected = DiffReport::create(vec![ Changed(String::from("hello_world.txt")) ]);
+    let expected = Ok(DiffReport::create(vec![ Changed(String::from("hello_world.txt")) ]));
 
     let actual = diff(InputType::Directory(dir1.as_ref()), InputType::Directory(dir2.as_ref()));
 
@@ -45,7 +45,7 @@ fn test_3() {
 fn test_4() {
     let (dir1, dir2) = create_paths(4);
 
-    let expected = DiffReport::create(vec![ Add(String::from("baz.txt")), Remove(String::from("bar.txt")), Remove(String::from("foo.txt")) ]);
+    let expected = Ok(DiffReport::create(vec![ Add(String::from("baz.txt")), Remove(String::from("bar.txt")), Remove(String::from("foo.txt")) ]));
 
     let actual = diff(InputType::Directory(dir1.as_ref()), InputType::Directory(dir2.as_ref()));
 
@@ -55,7 +55,7 @@ fn test_4() {
 fn test_5() {
     let (dir1, dir2) = create_paths(5);
 
-    let expected = DiffReport::create(vec![ Add(String::from("baz.txt")), Remove(String::from("bar.txt")), Remove(String::from("hello_world.txt")) ]);
+    let expected = Ok(DiffReport::create(vec![ Add(String::from("baz.txt")), Remove(String::from("bar.txt")), Remove(String::from("hello_world.txt")) ]));
 
     let actual = diff(InputType::Directory(dir1.as_ref()), InputType::Directory(dir2.as_ref()));
     
@@ -81,7 +81,7 @@ fn test_9() {
 fn test_10() {
     let (dir1, dir2) = create_paths(10);
 
-    let expected = DiffReport::create(vec![ Remove(String::from("child/foo.txt")) ]);
+    let expected = Ok(DiffReport::create(vec![ Remove(String::from("child/foo.txt")) ]));
 
     let actual = diff(InputType::Directory(dir1.as_ref()), InputType::Directory(dir2.as_ref()));
 
@@ -92,7 +92,7 @@ fn test_10() {
 fn test_11() {
     let (dir1, dir2) = create_paths(11);
 
-    let expected = DiffReport::create(vec![ Add(String::from("child/foo.txt")) ]);
+    let expected = Ok(DiffReport::create(vec![ Add(String::from("child/foo.txt")) ]));
 
     let actual = diff(InputType::Directory(dir1.as_ref()), InputType::Directory(dir2.as_ref()));
 
