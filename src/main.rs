@@ -1,8 +1,6 @@
 use dmap::diff;
 use dmap::diff::Diff::{Remove, Add, Changed};
-use std::collections::HashSet;
-use dmap::diff::{Diff, DiffReport};
-use std::iter::FromIterator;
+use dmap::diff::{DiffReport};
 use dmap::common::InputType;
 
 fn create_paths(test_no: i32) -> (String, String) {
@@ -131,7 +129,7 @@ fn test_12() {
     assert_eq!(expected, actual);
 }
 
-fn main() {
+fn run_basic_tests() {
     test_1();
     test_2();
     test_3();
@@ -144,6 +142,10 @@ fn main() {
     test_10();
     test_11();
     test_12();
+}
+
+fn main() {
+    run_basic_tests();
     
     println!("{}", '\u{2705}')
 }
