@@ -1,9 +1,9 @@
-use dmap::compare;
+use dmap::diff;
 use dmap::diff::Diff::{Remove, Add, Changed};
 use std::collections::HashSet;
-use dmap::diff::Diff;
+use dmap::diff::{Diff, DiffReport};
 use std::iter::FromIterator;
-
+use dmap::common::InputType;
 
 fn create_paths(test_no: i32) -> (String, String) {
     (format!("resources/test_{}/dir_1", test_no), format!("resources/test_{}/dir_2", test_no))
@@ -15,9 +15,9 @@ fn test_1() {
     
     let (dir1, dir2) = create_paths(1);
     
-    let expected = vec![ Remove(String::from("hello_world.txt")) ];
+    let expected = DiffReport::create(vec![ Remove(String::from("hello_world.txt")) ]);
     
-    let actual = compare(dir1.as_ref(), dir2.as_ref());
+    let actual = diff(InputType::Directory(dir1.as_ref()), InputType::Directory(dir2.as_ref()));
         
     assert_eq!(expected, actual);
 }
@@ -25,9 +25,9 @@ fn test_1() {
 fn test_2() {
     let (dir1, dir2) = create_paths(2);
 
-    let expected = vec![ Add(String::from("hello_world.txt")) ];
+    let expected = DiffReport::create(vec![ Add(String::from("hello_world.txt")) ]);
 
-    let actual = compare(dir1.as_ref(), dir2.as_ref());
+    let actual = diff(InputType::Directory(dir1.as_ref()), InputType::Directory(dir2.as_ref()));
 
     assert_eq!(expected, actual);
 }
@@ -35,9 +35,9 @@ fn test_2() {
 fn test_3() {
     let (dir1, dir2) = create_paths(3);
 
-    let expected = vec![ Changed(String::from("hello_world.txt")) ];
+    let expected = DiffReport::create(vec![ Changed(String::from("hello_world.txt")) ]);
 
-    let actual = compare(dir1.as_ref(), dir2.as_ref());
+    let actual = diff(InputType::Directory(dir1.as_ref()), InputType::Directory(dir2.as_ref()));
 
     assert_eq!(expected, actual);
 }
@@ -45,9 +45,9 @@ fn test_3() {
 fn test_4() {
     let (dir1, dir2) = create_paths(4);
 
-    let expected = vec![ Add(String::from("baz.txt")), Remove(String::from("bar.txt")), Remove(String::from("foo.txt")) ];
+    let expected = DiffReport::create(vec![ Add(String::from("baz.txt")), Remove(String::from("bar.txt")), Remove(String::from("foo.txt")) ]);
 
-    let actual = compare(dir1.as_ref(), dir2.as_ref());
+    let actual = diff(InputType::Directory(dir1.as_ref()), InputType::Directory(dir2.as_ref()));
 
     assert_eq!(expected, actual);
 }
@@ -55,9 +55,9 @@ fn test_4() {
 fn test_5() {
     let (dir1, dir2) = create_paths(5);
 
-    let expected = vec![ Add(String::from("baz.txt")), Remove(String::from("bar.txt")), Remove(String::from("hello_world.txt")) ];
+    let expected = DiffReport::create(vec![ Add(String::from("baz.txt")), Remove(String::from("bar.txt")), Remove(String::from("hello_world.txt")) ]);
 
-    let actual = compare(dir1.as_ref(), dir2.as_ref());
+    let actual = diff(InputType::Directory(dir1.as_ref()), InputType::Directory(dir2.as_ref()));
     
     assert_eq!(expected, actual);
 }
@@ -81,9 +81,9 @@ fn test_9() {
 fn test_10() {
     let (dir1, dir2) = create_paths(10);
 
-    let expected = vec![ Remove(String::from("child/foo.txt")) ];
+    let expected = DiffReport::create(vec![ Remove(String::from("child/foo.txt")) ]);
 
-    let actual = compare(dir1.as_ref(), dir2.as_ref());
+    let actual = diff(InputType::Directory(dir1.as_ref()), InputType::Directory(dir2.as_ref()));
 
     assert_eq!(expected, actual);
 }
@@ -92,9 +92,9 @@ fn test_10() {
 fn test_11() {
     let (dir1, dir2) = create_paths(11);
 
-    let expected = vec![ Add(String::from("child/foo.txt")) ];
+    let expected = DiffReport::create(vec![ Add(String::from("child/foo.txt")) ]);
 
-    let actual = compare(dir1.as_ref(), dir2.as_ref());
+    let actual = diff(InputType::Directory(dir1.as_ref()), InputType::Directory(dir2.as_ref()));
 
     assert_eq!(expected, actual);
 }
