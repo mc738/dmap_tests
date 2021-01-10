@@ -61,19 +61,43 @@ fn test_5() {
 }
 
 fn test_6() {
+    let (dir1, dir2) = create_paths(6);
 
+    let expected = Ok(DiffReport::create(vec![ Add(String::from("baz.txt")), Remove(String::from("bar.txt")), Remove(String::from("hello_world.txt")), Changed(String::from("foo.txt")) ]));
+
+    let actual = diff(InputType::Directory(dir1.as_ref()), InputType::Directory(dir2.as_ref()));
+
+    assert_eq!(expected, actual);
 }
 
 fn test_7() {
+    let (dir1, dir2) = create_paths(7);
 
+    let expected = Ok(DiffReport::create(vec![ Add(String::from("bar.txt")), Add(String::from("foo.txt")), Remove(String::from("baz.txt")) ]));
+
+    let actual = diff(InputType::Directory(dir1.as_ref()), InputType::Directory(dir2.as_ref()));
+
+    assert_eq!(expected, actual);
 }
 
 fn test_8() {
+    let (dir1, dir2) = create_paths(8);
 
+    let expected = Ok(DiffReport::create(vec![ Add(String::from("bar.txt")), Add(String::from("hello_world.txt")), Remove(String::from("baz.txt")) ]));
+
+    let actual = diff(InputType::Directory(dir1.as_ref()), InputType::Directory(dir2.as_ref()));
+
+    assert_eq!(expected, actual);
 }
 
 fn test_9() {
+    let (dir1, dir2) = create_paths(9);
 
+    let expected = Ok(DiffReport::create(vec![ Add(String::from("bar.txt")), Add(String::from("hello_world.txt")), Remove(String::from("baz.txt")), Changed(String::from("foo.txt")) ]));
+
+    let actual = diff(InputType::Directory(dir1.as_ref()), InputType::Directory(dir2.as_ref()));
+
+    assert_eq!(expected, actual);
 }
 
 fn test_10() {
@@ -97,11 +121,15 @@ fn test_11() {
     assert_eq!(expected, actual);
 }
 
+fn test_12() {
+    let (dir1, dir2) = create_paths(12);
 
+    let expected = Ok(DiffReport::create(vec![ Changed(String::from("child/foo.txt")) ]));
 
+    let actual = diff(InputType::Directory(dir1.as_ref()), InputType::Directory(dir2.as_ref()));
 
-
-
+    assert_eq!(expected, actual);
+}
 
 fn main() {
     test_1();
@@ -109,8 +137,13 @@ fn main() {
     test_3();
     test_4();
     test_5();
+    test_6();
+    test_7();
+    test_8();
+    test_9();
     test_10();
     test_11();
+    test_12();
     
     println!("{}", '\u{2705}')
 }
