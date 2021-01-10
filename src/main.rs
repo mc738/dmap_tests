@@ -78,6 +78,26 @@ fn test_9() {
 
 }
 
+fn test_10() {
+    let (dir1, dir2) = create_paths(10);
+
+    let expected = vec![ Remove(String::from("child/foo.txt")) ];
+
+    let actual = compare(dir1.as_ref(), dir2.as_ref());
+
+    assert_eq!(expected, actual);
+}
+
+
+fn test_11() {
+    let (dir1, dir2) = create_paths(11);
+
+    let expected = vec![ Add(String::from("child/foo.txt")) ];
+
+    let actual = compare(dir1.as_ref(), dir2.as_ref());
+
+    assert_eq!(expected, actual);
+}
 
 
 
@@ -91,4 +111,6 @@ fn main() {
     test_3();
     test_4();
     test_5();
+    test_10();
+    test_11();
 }
