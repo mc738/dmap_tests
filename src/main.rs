@@ -10,9 +10,7 @@ fn create_paths(test_no: i32) -> (String, String) {
 }
 
 fn test_1() {
-    
-    
-    
+
     let (dir1, dir2) = create_paths(1);
     
     let expected = Ok(DiffReport::create(vec![ Remove(String::from("hello_world.txt")) ]));
