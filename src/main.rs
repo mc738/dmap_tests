@@ -10,6 +10,9 @@ fn create_paths(test_no: i32) -> (String, String) {
 }
 
 fn test_1() {
+    
+    
+    
     let (dir1, dir2) = create_paths(1);
     
     let expected = vec![ Remove(String::from("hello_world.txt")) ];
@@ -110,4 +113,6 @@ fn main() {
     test_5();
     test_10();
     test_11();
+    
+    println!("{}", '\u{2705}')
 }
