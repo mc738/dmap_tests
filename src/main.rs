@@ -55,9 +55,6 @@ fn test_5() {
     let expected = vec![ Add(String::from("baz.txt")), Remove(String::from("bar.txt")), Remove(String::from("hello_world.txt")) ];
 
     let actual = compare(dir1.as_ref(), dir2.as_ref());
-
-    
-    
     
     assert_eq!(expected, actual);
 }
